@@ -1,24 +1,13 @@
 {
   "name": "hotel_hub",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "White-label dynamic QR landing page solution for hotels & restaurants.",
+  "main": "src/builder.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "node src/builder.js",
+    "build:all": "node src/batch.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/tibendaerick/hotel_hub.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
-  "bugs": {
-    "url": "https://github.com/tibendaerick/hotel_hub/issues"
-  },
-  "homepage": "https://github.com/tibendaerick/hotel_hub#readme",
   "dependencies": {
-    "qrcode": "^1.5.4"
+    "qrcode": "^1.5.3"
   }
 }
