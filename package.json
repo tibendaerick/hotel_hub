@@ -6,6 +6,7 @@
   "scripts": {
     "build": "node src/builder.js",
     "build:all": "node src/batch.js",
+    "export": "node src/export.js",
     "preview": "node src/server.js",
     "start": "node src/redirect.js"
   },
