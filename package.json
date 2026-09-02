@@ -5,7 +5,8 @@
   "main": "src/builder.js",
   "scripts": {
     "build": "node src/builder.js",
-    "build:all": "node src/batch.js"
+    "build:all": "node src/batch.js",
+    "start": "node src/server.js"
   },
   "dependencies": {
     "qrcode": "^1.5.3"
