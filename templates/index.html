@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,11 +11,30 @@
         :root {
             --primary: {{PRIMARY_COLOR}};
             --bg-gradient: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
-            --card-bg: rgba(255, 255, 255, 0.95);
-            --card-hover: #FFFFFF;
+            --card-bg: rgba(30, 41, 59, 0.75);
+            --card-border: rgba(255, 255, 255, 0.12);
+            --btn-bg: #FFFFFF;
+            --btn-text: #0F172A;
+            --text-main: #FFFFFF;
+            --text-sub: #94A3B8;
+            --icon-bg: rgba(15, 23, 42, 0.06);
+            --shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+            --btn-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.25);
+            --btn-shadow-active: 0 2px 6px -1px rgba(0, 0, 0, 0.2);
+        }
+
+        [data-theme="light"] {
+            --bg-gradient: linear-gradient(135deg, #F8FAFC 0%, #E2E8F0 100%);
+            --card-bg: rgba(255, 255, 255, 0.85);
+            --card-border: rgba(226, 232, 240, 0.8);
+            --btn-bg: #FFFFFF;
+            --btn-text: #0F172A;
             --text-main: #0F172A;
             --text-sub: #64748B;
-            --accent-glow: rgba(255, 255, 255, 0.15);
+            --icon-bg: rgba(15, 23, 42, 0.04);
+            --shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.1);
+            --btn-shadow: 0 8px 16px -4px rgba(15, 23, 42, 0.08);
+            --btn-shadow-active: 0 2px 4px -1px rgba(15, 23, 42, 0.1);
         }
 
         * {
@@ -24,6 +43,7 @@
             padding: 0;
             font-family: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             -webkit-tap-highlight-color: transparent;
+            transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
         }
 
         body {
@@ -33,20 +53,43 @@
             justify-content: center;
             align-items: center;
             padding: 24px 16px;
-            color: #FFFFFF;
+            color: var(--text-main);
         }
 
         .hub-card {
+            position: relative;
             width: 100%;
             max-width: 410px;
-            background: rgba(30, 41, 59, 0.7);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--card-border);
             border-radius: 28px;
             padding: 32px 24px 28px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            box-shadow: var(--shadow);
             text-align: center;
+        }
+
+        .theme-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid var(--card-border);
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-main);
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.15s ease, background 0.2s ease;
+        }
+
+        .theme-toggle:active {
+            transform: scale(0.90);
         }
 
         .brand-header {
@@ -65,7 +108,7 @@
             border-radius: 50%;
             object-fit: cover;
             border: 3px solid var(--primary);
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
             background: #FFFFFF;
         }
 
@@ -90,13 +133,13 @@
             font-size: 1.65rem;
             font-weight: 700;
             letter-spacing: -0.02em;
-            color: #FFFFFF;
+            color: var(--text-main);
             margin-bottom: 6px;
         }
 
         .hotel-tagline {
             font-size: 0.9rem;
-            color: #94A3B8;
+            color: var(--text-sub);
             font-weight: 400;
             line-height: 1.4;
         }
@@ -112,15 +155,16 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: var(--card-bg);
+            background: var(--btn-bg);
             padding: 18px 20px;
             border-radius: 18px;
             text-decoration: none;
-            color: var(--text-main);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            color: var(--btn-text);
+            box-shadow: var(--btn-shadow);
+            transition: transform 0.12s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.12s ease;
             position: relative;
             overflow: hidden;
+            border: 1px solid rgba(0, 0, 0, 0.05);
         }
 
         .btn-action::before {
@@ -133,9 +177,10 @@
             background: var(--primary);
         }
 
+        /* Tactile Affordances on Active Touch/Press */
         .btn-action:active {
-            transform: scale(0.97);
-            background: var(--card-hover);
+            transform: translateY(2px) scale(0.98);
+            box-shadow: var(--btn-shadow-active);
         }
 
         .btn-left {
@@ -148,7 +193,7 @@
             width: 42px;
             height: 42px;
             border-radius: 12px;
-            background: rgba(15, 23, 42, 0.05);
+            background: var(--icon-bg);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -165,32 +210,39 @@
             width: 32px;
             height: 32px;
             border-radius: 50%;
-            background: rgba(15, 23, 42, 0.05);
+            background: var(--icon-bg);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--text-sub);
+            color: #64748B;
             font-weight: 700;
             font-size: 0.9rem;
+            transition: transform 0.15s ease;
+        }
+
+        .btn-action:active .chevron-circle {
+            transform: translateX(3px);
         }
 
         .footer {
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 1px solid var(--card-border);
             padding-top: 20px;
             font-size: 0.78rem;
-            color: #64748B;
+            color: var(--text-sub);
             line-height: 1.5;
             font-weight: 400;
         }
 
         .footer p:first-child {
-            color: #94A3B8;
+            color: var(--text-main);
             font-weight: 600;
         }
     </style>
 </head>
 <body>
     <div class="hub-card">
+        <button class="theme-toggle" id="themeBtn" aria-label="Toggle Theme">☀️</button>
+        
         <header class="brand-header">
             <div class="avatar-wrapper">
                 <img src="{{LOGO_URL}}" alt="{{HOTEL_NAME}} Logo" class="brand-logo" onerror="this.src='https://images.unsplash.com/photo-1566073771259-6a8506099945?w=150&auto=format&fit=crop'">
@@ -230,5 +282,17 @@
             <p>All rights reserved.</p>
         </footer>
     </div>
+
+    <script>
+        const themeBtn = document.getElementById('themeBtn');
+        const html = document.documentElement;
+
+        themeBtn.addEventListener('click', () => {
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', newTheme);
+            themeBtn.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+        });
+    </script>
 </body>
 </html>
