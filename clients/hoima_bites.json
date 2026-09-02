@@ -1,0 +1,16 @@
+cat << 'EOF' > clients/hoima_bites.json
+{
+  "client_id": "hoima_bites",
+  "hotel_name": "Hoima Fastfoods & Bites",
+  "tagline": "Fast foods, local food at your service",
+  "primary_color": "#B45309",
+  "logo_url": "https://via.placeholder.com/150",
+  "contact_phone": "256770000000",
+  "base_domain": "https://hub.nexup.tech",
+  "links": {
+    "menu": "",
+    "table": "",
+    "room": ""
+  }
+}
+EOF
