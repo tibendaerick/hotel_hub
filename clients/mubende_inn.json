@@ -1,0 +1,14 @@
+{
+  "client_id": "mubende_inn",
+  "hotel_name": "Mubende Travellers Inn",
+  "tagline": "Quiet Stays & Fresh Local Cuisine",
+  "primary_color": "#2563EB",
+  "logo_url": "https://via.placeholder.com/150",
+  "contact_phone": "256780000000",
+  "base_domain": "https://hub.nexup.tech",
+  "links": {
+    "menu": "",
+    "table": "",
+    "room": ""
+  }
+}

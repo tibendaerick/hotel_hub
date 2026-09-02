@@ -1,16 +1,14 @@
-cat << 'EOF' > clients/hbhotel_hoima.json
 {
   "client_id": "hbhotel_hoima",
-  "hotel_name": "Hoima Buffalo Hotels Uganda",
-  "tagline": "Luxury Hotels in Western Uganda",
+  "hotel_name": "HB Hotels Uganda",
+  "tagline": "Comfort, Luxury & Hospitality in Hoima",
   "primary_color": "#0F766E",
-  "logo_url": "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=150&auto=format&fit=crop",
+  "logo_url": "https://via.placeholder.com/150",
   "contact_phone": "256700000000",
   "base_domain": "https://hub.nexup.tech",
   "links": {
-    "menu": "https://menu.toasttab.com/demo",
-    "table": "https://opentable.com/demo",
-    "room": "https://hbhotelsug.com/book"
+    "menu": "",
+    "table": "",
+    "room": ""
   }
 }
-EOF

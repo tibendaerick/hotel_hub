@@ -1,4 +1,3 @@
-cat << 'EOF' > src/builder.js
 const fs = require('fs');
 const path = require('path');
 const QRCode = require('qrcode');
@@ -14,7 +13,7 @@ function buildClientHub(configPath) {
     const templatePath = path.join(__dirname, '../templates/index.html');
     let template = fs.readFileSync(templatePath, 'utf8');
 
-    // Fallback Logic: Route empty web links directly to pre-filled WhatsApp queries
+    // WhatsApp Fallback Logic for missing web links
     const defaultPhone = config.contact_phone || '256000000000';
     const menuTarget = config.links.menu || `https://wa.me/${defaultPhone}?text=Hello,%20I%20would%20like%20to%20view%20the%20Food%20%26%20Drink%20menu.`;
     const tableTarget = config.links.table || `https://wa.me/${defaultPhone}?text=Hello,%20I%20would%20like%20to%20reserve%20a%20table.`;
@@ -28,7 +27,6 @@ function buildClientHub(configPath) {
                        .replace(/{{TABLE_URL}}/g, tableTarget)
                        .replace(/{{ROOM_URL}}/g, roomTarget);
 
-    // Apply Tenant Custom Primary Color to CSS variables inline on body tag for performance
     template = template.replace('<body>', `<body style="--primary: ${config.primary_color || '#2563EB'};">`);
 
     // Output Directory Preparation
@@ -40,7 +38,7 @@ function buildClientHub(configPath) {
     // Write Hydrated Output HTML
     fs.writeFileSync(path.join(outputDirectory, 'index.html'), template);
 
-    // Dynamic Target Redirect Route (Subdirectory model)
+    // Dynamic Target Redirect Route
     const targetRedirectUrl = `${config.base_domain}/h/${config.client_id}`;
     const qrOutputPath = path.join(outputDirectory, 'qrcode.png');
 
@@ -72,4 +70,3 @@ if (!targetConfigArgument) {
 }
 
 buildClientHub(targetConfigArgument);
-EOF
