@@ -2,148 +2,234 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>{{HOTEL_NAME}} | Reservations & Bookings</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: {{PRIMARY_COLOR}};
-            --bg: #0F172A;
-            --card-bg: #1E293B;
+            --gold: #D4AF37;
+            --gold-hover: #AA8C2C;
+            --bg: #0D0C0A;
+            --card-bg: #171512;
+            --card-border: #2A261F;
             --text-main: #FFFFFF;
-            --text-sub: #94A3B8;
-            --border: rgba(255, 255, 255, 0.1);
+            --text-sub: #B5A895;
+            --input-bg: #211E18;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Be Vietnam Pro', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        h1, h2, .title, .submit-btn {
+            font-family: 'Archivo Black', sans-serif;
+            text-transform: uppercase;
         }
 
         body {
             background-color: var(--bg);
             color: var(--text-main);
-            padding: 24px 16px;
+            padding: 24px 16px 16px;
+        }
+
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        .header-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 24px;
+        }
+
+        .back-btn {
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 700;
         }
 
         .booking-card {
-            max-width: 450px;
-            margin: 0 auto;
             background: var(--card-bg);
-            border: 1px solid var(--border);
+            border: 1.5px solid var(--gold);
             border-radius: 20px;
             padding: 24px;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.12);
         }
 
         .title {
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin-bottom: 6px;
+            font-size: 1.25rem;
+            color: var(--gold);
+            margin-bottom: 4px;
         }
 
         .sub {
             color: var(--text-sub);
-            font-size: 0.9rem;
-            margin-bottom: 20px;
+            font-size: 0.85rem;
+            margin-bottom: 24px;
         }
 
         .form-group {
             margin-bottom: 16px;
         }
 
+        .form-row {
+            display: flex;
+            gap: 12px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
         label {
             display: block;
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: var(--text-sub);
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--gold);
             margin-bottom: 6px;
+            text-transform: uppercase;
         }
 
         input, select, textarea {
             width: 100%;
-            padding: 12px;
-            border-radius: 12px;
-            border: 1px solid var(--border);
-            background: rgba(15, 23, 42, 0.8);
-            color: #FFF;
-            font-size: 0.95rem;
+            padding: 12px 14px;
+            border-radius: 10px;
+            border: 1px solid var(--card-border);
+            background: var(--input-bg);
+            color: #FFFFFF;
+            font-size: 0.9rem;
             outline: none;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--gold);
+        }
+
+        textarea {
+            height: 70px;
+            resize: none;
         }
 
         .submit-btn {
             width: 100%;
-            background: var(--primary);
-            color: #FFF;
+            background: var(--gold);
+            color: #000000;
             border: none;
             padding: 16px;
-            border-radius: 14px;
-            font-size: 1rem;
-            font-weight: 700;
+            border-radius: 12px;
+            font-size: 0.95rem;
             cursor: pointer;
             margin-top: 10px;
+            box-shadow: 0 6px 18px rgba(212, 175, 55, 0.25);
         }
 
-        .submit-btn:active {
-            transform: scale(0.98);
+        .submit-btn:active { transform: scale(0.98); }
+
+        footer {
+            text-align: center;
+            padding: 30px 16px 10px;
+            font-size: 0.75rem;
+            color: var(--text-sub);
+            border-top: 1px solid var(--card-border);
+            margin-top: 40px;
+        }
+
+        footer p:first-child {
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 4px;
         }
     </style>
 </head>
 <body>
-    <div class="booking-card">
-        <div class="title">{{HOTEL_NAME}}</div>
-        <div class="sub">Direct Table & Room Reservation</div>
 
-        <div class="form-group">
-            <label>Full Name</label>
-            <input type="text" id="guestName" placeholder="Enter your full name">
+    <div class="container">
+        <div class="header-nav">
+            <a href="./index.html" class="back-btn">← Back to Hub</a>
+            <span style="font-size: 0.75rem; color: var(--gold); font-weight: 800;">PREMIUM RESERVATIONS</span>
         </div>
 
-        <div class="form-group">
-            <label>Reservation Type</label>
-            <select id="bookingType">
-                <option value="Table Reservation">Table Reservation</option>
-                <option value="Room Booking">Room Accommodation</option>
-            </select>
+        <div class="booking-card">
+            <div class="title">{{HOTEL_NAME}}</div>
+            <div class="sub">Table Reservation & Room Accommodation</div>
+
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" id="fullName" placeholder="e.g. John Doe">
+            </div>
+
+            <div class="form-group">
+                <label>Reservation Type</label>
+                <select id="resType">
+                    <option value="Table Reservation">Table Reservation</option>
+                    <option value="Room Booking">Room Booking</option>
+                </select>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Date</label>
+                    <input type="date" id="resDate">
+                </div>
+                <div class="form-group">
+                    <label>Time</label>
+                    <input type="time" id="resTime">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Number of Guests / Persons</label>
+                <input type="number" id="guestCount" value="1" min="1">
+            </div>
+
+            <div class="form-group">
+                <label>Special Requests / Notes</label>
+                <textarea id="notes" placeholder="Enter any extra preferences..."></textarea>
+            </div>
+
+            <button class="submit-btn" onclick="sendBooking()">Submit Reservation Request</button>
         </div>
 
-        <div class="form-group">
-            <label>Date & Time</label>
-            <input type="datetime-local" id="bookingTime">
-        </div>
-
-        <div class="form-group">
-            <label>Number of Guests / Persons</label>
-            <input type="number" id="guestCount" value="1" min="1">
-        </div>
-
-        <button class="submit-btn" onclick="sendBooking()">Submit Booking Request</button>
+        <footer>
+            <p>Hotel Digital Menu</p>
+            <p>&copy; NexUp Technologies (U) 2023 - 2026</p>
+            <p>All Rights Reserved.</p>
+        </footer>
     </div>
 
     <script>
         const adminPhone = "{{ADMIN_PHONE}}";
 
         function sendBooking() {
-            const name = document.getElementById('guestName').value;
-            const type = document.getElementById('bookingType').value;
-            const time = document.getElementById('bookingTime').value;
+            const name = document.getElementById('fullName').value;
+            const type = document.getElementById('resType').value;
+            const date = document.getElementById('resDate').value;
+            const time = document.getElementById('resTime').value;
             const guests = document.getElementById('guestCount').value;
+            const notes = document.getElementById('notes').value || 'None';
 
-            if (!name || !time) {
-                alert('Please enter your name and select date/time.');
+            if (!name || !date || !time) {
+                alert('Please fill in your full name, date, and time.');
                 return;
             }
 
-            let msg = `*NEW RESERVATION REQUEST - {{HOTEL_NAME}}*\n`;
-            msg += `------------------------------\n`;
-            msg += `*Guest Name:* ${name}\n`;
-            msg += `*Type:* ${type}\n`;
-            msg += `*Date/Time:* ${time}\n`;
-            msg += `*Number of Persons:* ${guests}\n\n`;
-            msg += `Please confirm availability.`;
+            let msg = `NEW RESERVATION REQUEST - {{HOTEL_NAME}}\n\n`;
+            msg += `Guest Name: ${name}\n`;
+            msg += `Reservation type: ${type}\n`;
+            msg += `Date: ${date}\n`;
+            msg += `Time: ${time}\n`;
+            msg += `Number of guests/persons: ${guests}\n`;
+            msg += `Notes: ${notes}\n\n`;
+            msg += `Please confirm availability and booking requirements.`;
 
             window.location.href = `https://wa.me/${adminPhone}?text=${encodeURIComponent(msg)}`;
         }

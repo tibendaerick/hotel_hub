@@ -16,43 +16,30 @@ if (!fs.existsSync(outDir)) {
     fs.mkdirSync(outDir, { recursive: true });
 }
 
-// 1. Process Main Index Hub
-let indexTemplate = fs.readFileSync(path.join(__dirname, '../templates/index.html'), 'utf8');
-indexTemplate = indexTemplate
-    .replace(/{{HOTEL_NAME}}/g, config.hotelName)
-    .replace(/{{TAGLINE}}/g, config.tagline)
-    .replace(/{{PRIMARY_COLOR}}/g, config.primaryColor)
-    .replace(/{{LOGO_URL}}/g, config.logoUrl)
-    .replace(/{{MENU_URL}}/g, './menu.html')
-    .replace(/{{TABLE_URL}}/g, './booking.html')
-    .replace(/{{ROOM_URL}}/g, './booking.html');
+function renderTemplate(srcFile, outFile) {
+    let tpl = fs.readFileSync(path.join(__dirname, `../templates/${srcFile}`), 'utf8');
+    tpl = tpl
+        .replace(/{{HOTEL_NAME}}/g, config.hotelName || 'Hotel Hub')
+        .replace(/{{TAGLINE}}/g, config.tagline || 'Hospitality Experience')
+        .replace(/{{PRIMARY_COLOR}}/g, config.primaryColor || '#FF5722')
+        .replace(/{{LOGO_URL}}/g, config.logoUrl || 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=150&auto=format&fit=crop')
+        .replace(/{{ADMIN_PHONE}}/g, config.adminPhone || '256700000000');
+    
+    fs.writeFileSync(path.join(outDir, outFile), tpl);
+}
 
-fs.writeFileSync(path.join(outDir, 'index.html'), indexTemplate);
+// Render all hub static sub-pages
+renderTemplate('index.html', 'index.html');
+renderTemplate('menu.html', 'menu.html');
+renderTemplate('booking.html', 'booking.html');
+renderTemplate('inquiry.html', 'inquiry.html');
 
-// 2. Process Menu Page
-let menuTemplate = fs.readFileSync(path.join(__dirname, '../templates/menu.html'), 'utf8');
-menuTemplate = menuTemplate
-    .replace(/{{HOTEL_NAME}}/g, config.hotelName)
-    .replace(/{{PRIMARY_COLOR}}/g, config.primaryColor)
-    .replace(/{{ADMIN_PHONE}}/g, config.adminPhone || '256700000000');
-
-fs.writeFileSync(path.join(outDir, 'menu.html'), menuTemplate);
-
-// 3. Process Booking Page
-let bookingTemplate = fs.readFileSync(path.join(__dirname, '../templates/booking.html'), 'utf8');
-bookingTemplate = bookingTemplate
-    .replace(/{{HOTEL_NAME}}/g, config.hotelName)
-    .replace(/{{PRIMARY_COLOR}}/g, config.primaryColor)
-    .replace(/{{ADMIN_PHONE}}/g, config.adminPhone || '256700000000');
-
-fs.writeFileSync(path.join(outDir, 'booking.html'), bookingTemplate);
-
-// 4. Generate QR Code
+// Generate Dynamic QR Code
 const redirectUrl = `http://localhost:3000/r/${config.clientId}`;
 QRCode.toFile(path.join(outDir, 'qr.png'), redirectUrl, {
-    color: { dark: config.primaryColor, light: '#FFFFFF' },
+    color: { dark: config.primaryColor || '#FF5722', light: '#FFFFFF' },
     width: 500
 }, (err) => {
     if (err) throw err;
-    console.log(`[BUILD SUCCESS] Compiled Hub, Menu & Booking for ${config.clientId}`);
+    console.log(`[BUILD SUCCESS] Compiled Hub, Menu, Booking & Inquiry for ${config.clientId}`);
 });

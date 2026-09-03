@@ -1,186 +1,100 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{HOTEL_NAME}} | Guest Digital Hub</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>{{HOTEL_NAME}} | Guest Hub</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: {{PRIMARY_COLOR}};
-            --bg-gradient: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
-            --card-bg: rgba(30, 41, 59, 0.75);
-            --card-border: rgba(255, 255, 255, 0.12);
-            --btn-bg: #FFFFFF;
-            --btn-text: #0F172A;
+            --bg: #000000;
+            --card-bg: #111111;
+            --card-border: #222222;
             --text-main: #FFFFFF;
-            --text-sub: #94A3B8;
-            --icon-bg: rgba(15, 23, 42, 0.06);
-            --shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
-            --btn-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.25);
-            --btn-shadow-active: 0 2px 6px -1px rgba(0, 0, 0, 0.2);
-        }
-
-        [data-theme="light"] {
-            --bg-gradient: linear-gradient(135deg, #F8FAFC 0%, #E2E8F0 100%);
-            --card-bg: rgba(255, 255, 255, 0.85);
-            --card-border: rgba(226, 232, 240, 0.8);
-            --btn-bg: #FFFFFF;
-            --btn-text: #0F172A;
-            --text-main: #0F172A;
-            --text-sub: #64748B;
-            --icon-bg: rgba(15, 23, 42, 0.04);
-            --shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.1);
-            --btn-shadow: 0 8px 16px -4px rgba(15, 23, 42, 0.08);
-            --btn-shadow-active: 0 2px 4px -1px rgba(15, 23, 42, 0.1);
+            --text-sub: #A0A0A0;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             -webkit-tap-highlight-color: transparent;
-            transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+        }
+
+        h1, h2, .btn-text, .brand-title {
+            font-family: 'Archivo Black', sans-serif;
+            text-transform: uppercase;
         }
 
         body {
-            background: var(--bg-gradient);
+            background-color: var(--bg);
+            color: var(--text-main);
             min-height: 100vh;
             display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 24px 16px;
-            color: var(--text-main);
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 24px 16px 16px;
         }
 
-        .hub-card {
-            position: relative;
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
             width: 100%;
-            max-width: 410px;
-            background: var(--card-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--card-border);
-            border-radius: 28px;
-            padding: 32px 24px 28px;
-            box-shadow: var(--shadow);
+        }
+
+        .hero {
             text-align: center;
+            margin-top: 20px;
+            margin-bottom: 36px;
         }
 
-        .theme-toggle {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            border: 1px solid var(--card-border);
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--text-main);
-            font-size: 1.1rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.15s ease, background 0.2s ease;
-        }
-
-        .theme-toggle:active {
-            transform: scale(0.90);
-        }
-
-        .brand-header {
-            margin-bottom: 28px;
-        }
-
-        .avatar-wrapper {
-            position: relative;
-            display: inline-block;
-            margin-bottom: 16px;
-        }
-
-        .brand-logo {
-            width: 96px;
-            height: 96px;
+        .logo {
+            width: 85px;
+            height: 85px;
             border-radius: 50%;
             object-fit: cover;
-            border: 3px solid var(--primary);
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-            background: #FFFFFF;
+            border: 3px solid #FFFFFF;
+            margin-bottom: 16px;
+            box-shadow: 0 8px 24px rgba(255, 255, 255, 0.1);
         }
 
-        .verified-badge {
-            position: absolute;
-            bottom: 4px;
-            right: 4px;
-            background: var(--primary);
-            color: #FFF;
-            border-radius: 50%;
-            width: 24px;
-            height: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            border: 2px solid #1E293B;
-            font-weight: 700;
-        }
-
-        .hotel-title {
-            font-size: 1.65rem;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            color: var(--text-main);
+        .brand-title {
+            font-size: 1.4rem;
+            letter-spacing: 0.5px;
             margin-bottom: 6px;
         }
 
-        .hotel-tagline {
-            font-size: 0.9rem;
+        .tagline {
+            font-size: 0.88rem;
             color: var(--text-sub);
-            font-weight: 400;
-            line-height: 1.4;
         }
 
-        .action-grid {
+        .nav-stack {
             display: flex;
             flex-direction: column;
-            gap: 14px;
-            margin-bottom: 32px;
+            gap: 16px;
         }
 
-        .btn-action {
+        .nav-btn {
+            background: var(--card-bg);
+            border: 1.5px solid var(--card-border);
+            border-radius: 16px;
+            padding: 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: var(--btn-bg);
-            padding: 18px 20px;
-            border-radius: 18px;
             text-decoration: none;
-            color: var(--btn-text);
-            box-shadow: var(--btn-shadow);
-            transition: transform 0.12s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.12s ease;
-            position: relative;
-            overflow: hidden;
-            border: 1px solid rgba(0, 0, 0, 0.05);
+            color: var(--text-main);
+            transition: all 0.2s ease;
         }
 
-        .btn-action::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            height: 100%;
-            width: 6px;
-            background: var(--primary);
-        }
-
-        /* Tactile Affordances on Active Touch/Press */
-        .btn-action:active {
-            transform: translateY(2px) scale(0.98);
-            box-shadow: var(--btn-shadow-active);
+        .nav-btn:active {
+            transform: scale(0.98);
+            border-color: #FFFFFF;
+            background: #1A1A1A;
         }
 
         .btn-left {
@@ -189,110 +103,77 @@
             gap: 14px;
         }
 
-        .btn-icon-box {
-            width: 42px;
-            height: 42px;
-            border-radius: 12px;
-            background: var(--icon-bg);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.3rem;
+        .btn-icon {
+            font-size: 1.4rem;
         }
 
         .btn-text {
-            font-size: 1.05rem;
-            font-weight: 600;
-            letter-spacing: -0.01em;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
         }
 
-        .chevron-circle {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            background: var(--icon-bg);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #64748B;
-            font-weight: 700;
-            font-size: 0.9rem;
-            transition: transform 0.15s ease;
-        }
-
-        .btn-action:active .chevron-circle {
-            transform: translateX(3px);
-        }
-
-        .footer {
-            border-top: 1px solid var(--card-border);
-            padding-top: 20px;
-            font-size: 0.78rem;
+        .arrow {
+            font-size: 1.2rem;
             color: var(--text-sub);
-            line-height: 1.5;
-            font-weight: 400;
         }
 
-        .footer p:first-child {
+        footer {
+            text-align: center;
+            padding: 30px 16px 10px;
+            font-size: 0.75rem;
+            color: var(--text-sub);
+            border-top: 1px solid var(--card-border);
+            margin-top: 40px;
+        }
+
+        footer p:first-child {
+            font-weight: 700;
             color: var(--text-main);
-            font-weight: 600;
+            margin-bottom: 4px;
         }
     </style>
 </head>
 <body>
-    <div class="hub-card">
-        <button class="theme-toggle" id="themeBtn" aria-label="Toggle Theme">☀️</button>
-        
-        <header class="brand-header">
-            <div class="avatar-wrapper">
-                <img src="{{LOGO_URL}}" alt="{{HOTEL_NAME}} Logo" class="brand-logo" onerror="this.src='https://images.unsplash.com/photo-1566073771259-6a8506099945?w=150&auto=format&fit=crop'">
-                <div class="verified-badge">✓</div>
-            </div>
-            <h1 class="hotel-title">{{HOTEL_NAME}}</h1>
-            <p class="hotel-tagline">{{TAGLINE}}</p>
-        </header>
 
-        <main class="action-grid">
-            <a href="{{MENU_URL}}" class="btn-action">
+    <div class="container">
+        <div class="hero">
+            <img src="{{LOGO_URL}}" class="logo" alt="{{HOTEL_NAME}}">
+            <div class="brand-title">{{HOTEL_NAME}}</div>
+            <div class="tagline">{{TAGLINE}}</div>
+        </div>
+
+        <div class="nav-stack">
+            <a href="./menu.html" class="nav-btn">
                 <div class="btn-left">
-                    <div class="btn-icon-box">🍽️</div>
+                    <span class="btn-icon">🍽️</span>
                     <span class="btn-text">Order Food & Drinks</span>
                 </div>
-                <div class="chevron-circle">&rarr;</div>
+                <span class="arrow">→</span>
             </a>
-            <a href="{{TABLE_URL}}" class="btn-action">
-                <div class="btn-left">
-                    <div class="btn-icon-box">🍷</div>
-                    <span class="btn-text">Reserve a Table</span>
-                </div>
-                <div class="chevron-circle">&rarr;</div>
-            </a>
-            <a href="{{ROOM_URL}}" class="btn-action">
-                <div class="btn-left">
-                    <div class="btn-icon-box">🛏️</div>
-                    <span class="btn-text">Book a Room / Inquiry</span>
-                </div>
-                <div class="chevron-circle">&rarr;</div>
-            </a>
-        </main>
 
-        <footer class="footer">
-            <p>Hotel Digital Hub</p>
-            <p>&copy; NexUp Technologies(U) 2026</p>
-            <p>All rights reserved.</p>
-        </footer>
+            <a href="./booking.html" class="nav-btn">
+                <div class="btn-left">
+                    <span class="btn-icon">🛎️</span>
+                    <span class="btn-text">Reserve Table / Book Room</span>
+                </div>
+                <span class="arrow">→</span>
+            </a>
+
+            <a href="./inquiry.html" class="nav-btn">
+                <div class="btn-left">
+                    <span class="btn-icon">💬</span>
+                    <span class="btn-text">Inquiries</span>
+                </div>
+                <span class="arrow">→</span>
+            </a>
+        </div>
     </div>
 
-    <script>
-        const themeBtn = document.getElementById('themeBtn');
-        const html = document.documentElement;
+    <footer>
+        <p>Hotel Digital Menu</p>
+        <p>&copy; NexUp Technologies (U) 2023 - 2026</p>
+        <p>All Rights Reserved.</p>
+    </footer>
 
-        themeBtn.addEventListener('click', () => {
-            const currentTheme = html.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            html.setAttribute('data-theme', newTheme);
-            themeBtn.textContent = newTheme === 'dark' ? '☀️' : '🌙';
-        });
-    </script>
 </body>
 </html>
