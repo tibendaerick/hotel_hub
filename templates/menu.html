@@ -48,7 +48,6 @@
             padding-bottom: 220px;
         }
 
-        /* Top Header Navigation */
         header {
             position: sticky;
             top: 0;
@@ -130,7 +129,6 @@
             gap: 8px;
         }
 
-        /* Today's Special Card */
         .special-card {
             background: var(--card-bg);
             border: 2px solid var(--primary);
@@ -185,7 +183,6 @@
             color: var(--primary);
         }
 
-        /* Inline Controls */
         .qty-controls {
             display: flex;
             align-items: center;
@@ -220,7 +217,6 @@
             text-align: center;
         }
 
-        /* Regular Menu Cards */
         .menu-card {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
@@ -232,7 +228,6 @@
             align-items: center;
         }
 
-        /* Special Instructions */
         .instructions-box {
             width: 100%;
             height: 70px;
@@ -251,7 +246,6 @@
             border-color: var(--primary);
         }
 
-        /* Floating Checkout Bar */
         .floating-bar {
             position: fixed;
             bottom: 0;
@@ -446,14 +440,13 @@
             <div class="qty-controls"><button class="qty-btn" onclick="updateQty(this, -1)">-</button><span class="qty-val">0</span><button class="qty-btn" onclick="updateQty(this, 1)">+</button></div>
         </div>
 
-        <!-- Special Instructions Box -->
         <div class="section-title">📝 Special Instructions</div>
         <textarea id="instructions" class="instructions-box" placeholder="Specify any food allergies, extra spice levels, or drink preferences here..."></textarea>
 
         <footer>
             <p>Hotel Digital Menu</p>
             <p>&copy; NexUp Technologies (U) 2023 - 2026</p>
-            <p>All rights reserved.</p>
+            <p>All Rights Reserved.</p>
         </footer>
     </div>
 
@@ -466,7 +459,7 @@
                 <button class="service-btn" onclick="setService('TakeAway / Delivery', this)">TakeAway / Delivery</button>
             </div>
             
-            <input type="text" id="locationInput" class="loc-input" placeholder="Enter Room No. or Table No.">
+            <input type="text" id="locationInput" class="loc-input" placeholder="Enter Table No.">
 
             <div class="summary-split">
                 <span id="dishesCount">Dishes: 0</span>
@@ -497,6 +490,15 @@
             activeService = service;
             document.querySelectorAll('.service-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
+
+            const locInput = document.getElementById('locationInput');
+            if (service === 'TakeAway / Delivery') {
+                locInput.placeholder = 'Enter Delivery Address / Neighborhood (e.g., Hoima Boma, near Shell)';
+            } else if (service === 'Room / Table') {
+                locInput.placeholder = 'Enter Room No. or Table No.';
+            } else {
+                locInput.placeholder = 'Enter Table No.';
+            }
         }
 
         function updateQty(btn, change) {
@@ -529,7 +531,6 @@
                 const item = cart[name];
                 let itemUnitPrice = item.basePrice;
 
-                // 10% discount on Today's Special if quantity is 3 or more
                 if (item.isSpecial && item.qty >= 3) {
                     itemUnitPrice = item.basePrice * 0.9;
                 }
@@ -557,11 +558,16 @@
             const location = document.getElementById('locationInput').value || 'Not Specified';
             const instructions = document.getElementById('instructions').value || 'None';
 
+            let locationLabel = 'Room/Table No';
+            if (activeService === 'TakeAway / Delivery') {
+                locationLabel = 'Delivery Location';
+            }
+
             let msg = `*NEW DIGITAL ORDER - {{HOTEL_NAME}}*\n`;
             msg += `------------------------------------\n`;
             msg += `*Service:* ${activeService}\n`;
-            msg += `*Room/Table No:* ${location}\n\n`;
-            msg += `*ORDER SUMMARY:*\n`;
+            msg += `*${locationLabel}:* ${location}\n\n`;
+            msg += `*Items Ordered:*\n`;
 
             for (let name in cart) {
                 const item = cart[name];
@@ -573,7 +579,7 @@
                     note = ' (10% Discount Applied)';
                 }
 
-                msg += `• ${name} x${item.qty}${note} -> UGX ${(effectivePrice * item.qty).toLocaleString()}\n`;
+                msg += `• ${name} (${item.qty}x)${note} -> UGX ${(effectivePrice * item.qty).toLocaleString()}\n`;
             }
 
             msg += `------------------------------------\n`;
