@@ -1,3 +1,6 @@
+## Hotel Hub Engine
+Premium dynamic QR landing page solution for hotels/ restaurants/ foodhubs & takeaways.
+
 ## NexUp Technologies Project AF_hotel27
 Hotel Dynamic QR & Guest Engagement Engine
 
