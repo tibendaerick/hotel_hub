@@ -1,13 +1,7 @@
-const path = require('path');
-const fs = require('fs');
-
 module.exports = (req, res) => {
-    const { clientId } = req.query;
+    // Get client name from link query or default to hbhotel_hoima
+    const clientId = req.query.clientId || 'hbhotel_hoima';
     
-    if (!clientId) {
-        return res.status(400).send('Client ID is required');
-    }
-
-    // Redirect dynamic QR scan directly to the client's landing hub
+    // Redirect directly to the hotel home page
     res.redirect(302, `/h/${clientId}/index.html`);
 };

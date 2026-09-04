@@ -1,14 +1,18 @@
 {
   "version": 2,
   "outputDirectory": "dist",
-  "rewrites": [
+  "routes": [
     {
-      "source": "/r/:clientId",
-      "destination": "/api/index.js"
+      "src": "^/r/(?<clientId>[^/]+)$",
+      "dest": "/api/index.js?clientId=$clientId"
     },
     {
-      "source": "/h/:clientId/(.*)",
-      "destination": "/h/:clientId/$1"
+      "src": "^/$",
+      "dest": "/api/index.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
     }
   ]
 }
