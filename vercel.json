@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "outputDirectory": "dist",
+  "rewrites": [
+    {
+      "source": "/r/:clientId",
+      "destination": "/api/index.js"
+    },
+    {
+      "source": "/h/:clientId/(.*)",
+      "destination": "/h/:clientId/$1"
+    }
+  ]
+}
