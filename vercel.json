@@ -1,18 +1,5 @@
 {
   "version": 2,
   "outputDirectory": "dist",
-  "routes": [
-    {
-      "src": "^/r/(?<clientId>[^/]+)$",
-      "dest": "/api/index.js?clientId=$clientId"
-    },
-    {
-      "src": "^/$",
-      "dest": "/api/index.js"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/$1"
-    }
-  ]
+  "cleanUrls": true
 }
